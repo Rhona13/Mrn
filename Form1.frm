@@ -15,6 +15,14 @@ Begin VB.Form Form1
    ScaleWidth      =   6795
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CommandButton Command2 
+      Caption         =   "Cancel"
+      Height          =   375
+      Left            =   5400
+      TabIndex        =   55
+      Top             =   8280
+      Width           =   1095
+   End
    Begin VB.CheckBox Check1 
       Appearance      =   0  'Flat
       BackColor       =   &H00FFFFC0&
@@ -464,7 +472,7 @@ Begin VB.Form Form1
       Index           =   1
       Left            =   360
       TabIndex        =   33
-      Top             =   8040
+      Top             =   7680
       Width           =   2415
    End
    Begin VB.Label Label11 
@@ -478,7 +486,7 @@ Begin VB.Form Form1
       Index           =   0
       Left            =   360
       TabIndex        =   29
-      Top             =   7680
+      Top             =   8040
       Width           =   2415
    End
    Begin VB.Label Label10 
@@ -620,7 +628,27 @@ Attribute VB_Exposed = False
 Dim prevbill As Double
 
 Private Sub Command1_Click()
-prevbill = txtprevbill.text
+prevbill = txtprevbill.Text
+End Sub
+
+Private Sub Command2_Click()
+txtcbu.Text = ""
+txtcpc.Text = ""
+txtidfee.Text = ""
+txtmedical.Text = ""
+txtmort.Text = ""
+txtsruch.Text = ""
+txtmaterials.Text = ""
+txtothers.Text = ""
+txtpca.Text = ""
+txttotalamount.Text = ""
+txtgrand.Text = ""
+txtcubic.Text = ""
+txtbill.Text = ""
+txtpresent.Text = ""
+
+
+
 End Sub
 
 Private Sub Command3_Click()
@@ -641,39 +669,42 @@ Dim total As Double
 Dim grandtotal As Double
 
 
-If Trim(txtprevbill.text) = "" Then txtprevbill.text = "0.00"
-If Trim(txtprev.text) = "" Then txtprev.text = "0.00"
-If Trim(txtpresent.text) = "" Then txtpresent.text = "0.00"
-If Trim(txtcbu.text) = "" Then txtcbu.text = "0.00"
-If Trim(txtcpc.text) = "" Then txtcpc.text = "0.00"
-If Trim(txtpca.text) = "" Then txtpca.text = "0.00"
-If Trim(txtidfee.text) = "" Then txtidfee.text = "0.00"
-If Trim(txtmedical.text) = "" Then txtmedical.text = "0.00"
-If Trim(txtmort.text) = "" Then txtmort.text = "0.00"
-If Trim(txtsruch.text) = "" Then txtsruch.text = "0.00"
-If Trim(txtmaterials.text) = "" Then txtmaterials.text = "0.00"
-If Trim(txtothers.text) = "" Then txtothers.text = "0.00"
+If Trim(txtprevbill.Text) = "" Then txtprevbill.Text = "0.00"
+If Trim(txtprev.Text) = "" Then txtprev.Text = "0.00"
+If Trim(txtpresent.Text) = "" Then txtpresent.Text = "0.00"
+If Trim(txtcbu.Text) = "" Then txtcbu.Text = "0.00"
+If Trim(txtcpc.Text) = "" Then txtcpc.Text = "0.00"
+If Trim(txtpca.Text) = "" Then txtpca.Text = "0.00"
+If Trim(txtidfee.Text) = "" Then txtidfee.Text = "0.00"
+If Trim(txtmedical.Text) = "" Then txtmedical.Text = "0.00"
+If Trim(txtmort.Text) = "" Then txtmort.Text = "0.00"
+If Trim(txtsruch.Text) = "" Then txtsruch.Text = "0.00"
+If Trim(txtmaterials.Text) = "" Then txtmaterials.Text = "0.00"
+If Trim(txtothers.Text) = "" Then txtothers.Text = "0.00"
 
-prev = Val(txtprev.text)
-current = Val(txtpresent.text)
-cbu = Val(txtcbu.text)
-cpc = Val(txtcpc.text)
-pca = Val(txtpca.text)
-idfee = Val(txtidfee.text)
-medical = Val(txtmedical.text)
-mortuary = Val(txtmort.text)
-surcharge = Val(txtsruch.text)
-materials = Val(txtmaterials.text)
-others = Val(txtothers.text)
+prev = Val(txtprev.Text)
+current = Val(txtpresent.Text)
+cbu = Val(txtcbu.Text)
+cpc = Val(txtcpc.Text)
+pca = Val(txtpca.Text)
+idfee = Val(txtidfee.Text)
+medical = Val(txtmedical.Text)
+mortuary = Val(txtmort.Text)
+surcharge = Val(txtsruch.Text)
+materials = Val(txtmaterials.Text)
+others = Val(txtothers.Text)
 
 cubic = current - prev
 total = cubic * 29.42
 totalamount = total + cbu + cpc + pca + idfee + medical + mortuary + surcharge + materials + others
 grandtotal = totalamount + prevbill
-txtcubic.text = Format(cubic, "0.00")
-txtbill.text = Format(total, "0.00")
-txttotalamount.text = Format(totalamount, "0.00")
-txtgrand.text = Format(grandtotal, "0.00")
+txtcubic.Text = Format(cubic, "0.00")
+txtbill.Text = Format(total, "0.00")
+txttotalamount.Text = Format(totalamount, "0.00")
+txtgrand.Text = Format(grandtotal, "0.00")
+txtpresent.Text = totalamount + prevbill
+txtprev.Text = prevbill
+
 End Sub
 
 Private Sub Form_Load()
@@ -682,10 +713,10 @@ Dim currentDate As Date
 Dim due As Date
 due = DateAdd("m", 6, currentDate)
 previousDate = DateAdd("m", -8, currentDate)
-txt_current_date.text = Format(currentDate, "5/24/2024")
-txt_current_date2.text = Format(currentDate, "5/24/2024")
-txt_prev_date.text = Format(previousDate, "mm/24/2024")
-txtdue.text = Format(due, "mm/24/2024")
+txt_current_date.Text = Format(currentDate, "5/31/2024")
+txt_current_date2.Text = Format(currentDate, "5/31/2024")
+txt_prev_date.Text = Format(previousDate, "mm/31/2024")
+txtdue.Text = Format(due, "mm/31/2024")
 End Sub
 
 
